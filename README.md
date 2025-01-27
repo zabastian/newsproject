@@ -147,8 +147,7 @@ public class AspectPractice {
 
 Trouble Shooting
 
-₩₩₩
-
+```
 Define the Problem
 
 -1.token을 생성할 시 회원가입과 로그인에 필터가 적용이 되어 토큰이없다는 오류 메세지가 나옴
