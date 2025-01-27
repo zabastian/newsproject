@@ -114,7 +114,7 @@ public class AspectPractice {
         log.info("BEFORE "); // 해당 메서드 실행되기 전 부가기능
         long startTime = System.currentTimeMillis();
         try {
-            Object result = joinPoint.proceed(); //핵심 기능 수행되는 부분 --> 횡단관심사
+            Object result = joinPoint.proceed(); //핵심 기능 수행되는 부분 
             log.info("AFTER RETURNING");
             log.info("result : {} ", result.getClass());
             return result;
