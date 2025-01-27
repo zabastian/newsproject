@@ -1,3 +1,27 @@
+Web Config
+```
+@Configuration
+@RequiredArgsConstructor
+public class WebConfig {
+
+    private final TokenService tokenService;
+
+    @Bean
+    public FilterRegistrationBean loginCheckFilter() {
+        FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(new CustomFilter(tokenService));
+        filterRegistrationBean.setOrder(1);
+        filterRegistrationBean.addUrlPatterns("/*");
+        return filterRegistrationBean;
+    }
+
+    @Bean
+    public AspectPractice aspectPractice() {
+        return new AspectPractice();
+    }
+
+```
+
 Gradle
 
     implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -119,4 +143,20 @@ public class AspectPractice {
         return new ProfileDto(profile.getUser().getUserId(),profile.getTitle(),profile.getContents());
     }
 ```
+
+```
+Trouble Shooting
+
+Define the Problem
+
+-1.token을 생성할 시 회원가입과 로그인에 필터가 적용이 되어 토큰이없다는 오류 메세지가 나옴
+-2.토큰이 제대로 생성되지 않는 문제가 나옴
+Analyze the Root Cause
+
+- 1.iswhitelist로 sign,login 추가를 안해 줌
+- 2.회원갸입시에 토큰을 생성하는 코드를 서비스단에 넣어 문제가 발생 
+Implement the Solution
+
+- 1.iswhitelist를 적용하니 문제가 해결
+- 2.회원가입이 아니라 로그인시 토큰을 생성하는 코드를 서비스단에 넣어주니 문제가 해결
 
