@@ -6,6 +6,7 @@ Gradle
 
 Create a JWT
 
+```
   public String createToken(Long userId) {
         try {
             Algorithm algorithm = Algorithm.HMAC256("asdafgasdawdasfagasd");
@@ -21,6 +22,7 @@ Create a JWT
         }
         return null;
     }
+```
 
 Verify a JWT
 
