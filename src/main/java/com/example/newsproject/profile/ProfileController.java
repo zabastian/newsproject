@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/profile")
@@ -50,6 +52,12 @@ public class ProfileController {
     public ResponseEntity<ProfileReadDto> profile_read(@PathVariable Long profileId){
         return new ResponseEntity<>(profileService.readProfile(profileId), HttpStatus.OK);
     }
+
+    @GetMapping
+    public ResponseEntity<List<ProfileReadDto>> profileAllRead(){
+        return new ResponseEntity<>(profileService.readAllProfile(),HttpStatus.OK);
+    }
+
     @PutMapping("/{profileId}")
     public ResponseEntity<ProfileReadDto> profile_update(@PathVariable Long profileId, @RequestBody ProfileUpdateRequestDto requestDto){
         ProfileReadDto profile = profileService.updateProfile(

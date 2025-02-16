@@ -28,6 +28,7 @@ public class UserController {
         SignupResponseDto signupResponseDto =userService.signupUserService(
                 request.getUsername(),
                 request.getEmail(),
+
                 request.getPassword()
         );
         return new ResponseEntity<>(signupResponseDto,HttpStatus.CREATED);

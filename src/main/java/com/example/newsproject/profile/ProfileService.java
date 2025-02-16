@@ -11,6 +11,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ProfileService {
@@ -29,8 +33,22 @@ public class ProfileService {
     public ProfileReadDto readProfile(long profileId){
         Profile profile = profileRepository.findById(profileId)
                 .orElseThrow(() -> new newValidationException("프로필 생성 해주세요",HttpStatus.CONFLICT));
-//        System.out.println("프로필 아이디 " + profile.getProfileId());
+        // profileRepository.save(profile); 가 필요없는 이유는 이건 단순히 저장된 정보를 조회하는 코드이기 때문이다 이미 저장되있는 코드를 또다시 save할 필요가 없다.
         return new ProfileReadDto(profile.getProfileId(),profile.getTitle(),profile.getContents());
+    }
+
+    public List<ProfileReadDto> readAllProfile(){
+        List<Profile> profiles = profileRepository.findAll();
+        return profiles.stream()
+                .map(profile -> new ProfileReadDto(profile))
+                .collect(Collectors.toList());
+
+//        List<ProfileReadDto> profileReadDtos = new ArrayList<>();
+//        for(Profile profile : profiles){
+//            profileReadDtos.add(new ProfileReadDto(profile));
+//        }
+//        return profileReadDtos;
+
     }
 
     public ProfileReadDto updateProfile(long profileId,String title,String contents){

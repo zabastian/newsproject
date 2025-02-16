@@ -15,7 +15,6 @@ import java.io.UnsupportedEncodingException;
 public class TokenService {
 
 //    private static final String SECRETE = "secrete";
-//    private static final String SECRETE = "secrete";
         private static final String BEARER_PREFIX = "Bearer";
 
 
@@ -60,9 +59,9 @@ public class TokenService {
 
         } catch (JWTVerificationException ex) {
             // Invalid signature/claims
-            throw new RuntimeException("토큰없음",ex);
+            throw new RuntimeException("토큰 검증 실패",ex);
         } catch (UnsupportedEncodingException ex) {
-            throw new RuntimeException("토큰없음2", ex);
+            throw new RuntimeException("HMAC256 생성 실패", ex);
         }
     }
 }
